@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author       = { 'pilot34' => 'gleb34@gmail.com' }
   s.source       = { :git => 'https://github.com/pilot34/P34Analytics.git' }
   s.platform     = :ios, '5.0'
-  s.source_files = './**/*.{h,m}'
+  s.source_files = 'P34Analytics.{h,m}'
   s.requires_arc = true
   s.dependency 'UIDeviceAddition'
   s.dependency 'GoogleAnalytics-iOS-SDK'
