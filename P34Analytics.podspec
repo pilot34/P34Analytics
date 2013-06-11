@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
   s.source_files = 'P34Analytics.{h,m}'
   s.requires_arc = true
   s.dependency 'UIDeviceAddition'
-  s.dependency 'GoogleAnalytics-iOS-SDK'
+  s.dependency 'GoogleAnalytics-iOS-SDK', :version => '1.5.1'
   s.dependency 'FlurrySDK'
 end
