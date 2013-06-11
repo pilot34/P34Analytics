@@ -10,6 +10,6 @@ Pod::Spec.new do |s|
   s.source_files = 'P34Analytics.{h,m}'
   s.requires_arc = true
   s.dependency 'UIDeviceAddition'
-  s.dependency 'GoogleAnalytics-iOS-SDK', :podspec => 'https://raw.github.com/CocoaPods/Specs/master/GoogleAnalytics-iOS-SDK/1.5.1/GoogleAnalytics-iOS-SDK.podspec'
+  s.dependency 'GoogleAnalytics-iOS-SDK', '1.5.1'
 
 end
