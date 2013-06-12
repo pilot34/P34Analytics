@@ -10,7 +10,6 @@
 
 @interface P34Analytics : NSObject
 
-+ (void)startWithGoogleId:(NSString *)google flurryId:(NSString *)flurryId;
 + (void)startWithId:(NSString *)id;
 + (void)trackPageView:(NSString *)page;
 
@@ -18,5 +17,6 @@
             action:(NSString *)action;
 
 + (void)trackEvent:(NSString *)event;
++ (void)setCustomVariable:(NSString *)name value:(NSString *)value;
 
 @end

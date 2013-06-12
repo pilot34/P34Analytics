@@ -7,46 +7,59 @@
 //
 
 #import "P34Analytics.h"
-#import "GAI.h"
-#import "GAITracker.h"
+#import "GANTracker.h"
 #import "UIDevice+IdentifierAddition.h"
-#import "Flurry.h"
-
-static BOOL __use_flurry;
 
 @implementation P34Analytics
 
-+ (void)startWithGoogleId:(NSString *)google flurryId:(NSString *)flurryId
-{
-    [self startWithId:google];
-    [Flurry startSession:flurryId];
-    __use_flurry = YES;
-}
-
 + (void)startWithId:(NSString *)id
 {
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-    [[GAI sharedInstance] trackerWithTrackingId:id];
+    [[GANTracker sharedTracker] startTrackerWithAccountID:id
+                                           dispatchPeriod:10
+                                                 delegate:nil];
+    [[GANTracker sharedTracker] setCustomVariableAtIndex:1
+                                                    name:@"app_version"
+                                                   value:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+                                                   scope:kGANVisitorScope
+                                               withError:nil];
+    
+    [[GANTracker sharedTracker] setCustomVariableAtIndex:2
+                                                    name:@"ios_version"
+                                                   value:UIDevice.currentDevice.systemVersion
+                                                   scope:kGANVisitorScope
+                                               withError:nil];
+    
+    [[GANTracker sharedTracker] setCustomVariableAtIndex:3
+                                                    name:@"identifier"
+                                                   value:UIDevice.currentDevice.uniqueDeviceIdentifier
+                                                   scope:kGANVisitorScope
+                                               withError:nil];
+}
+
+
++ (void)setCustomVariable:(NSString *)name value:(NSString *)value
+{
+    [[GANTracker sharedTracker] setCustomVariableAtIndex:5
+                                                    name:name
+                                                   value:value
+                                                   scope:kGANVisitorScope
+                                               withError:nil];
 }
 
 + (void)trackPageView:(NSString *)page
 {
-    [[[GAI sharedInstance] defaultTracker] trackView:page];
-    
-    if (__use_flurry)
-        [Flurry logPageView];
+    [[GANTracker sharedTracker] trackPageview:page
+                                    withError:nil];
 }
 
 + (void)trackEvent:(NSString *)event
             action:(NSString *)action
 {
-    [[[GAI sharedInstance] defaultTracker] trackEventWithCategory:event
-                                                       withAction:action
-                                                        withLabel:action
-                                                        withValue:@0];
-    
-    if (__use_flurry)
-        [Flurry logEvent:event withParameters:@{ @"action" : action }];
+    [[GANTracker sharedTracker] trackEvent:event
+                                    action:action
+                                     label:event
+                                     value:0
+                                 withError:nil];
 }
 
 + (void)trackEvent:(NSString *)event
