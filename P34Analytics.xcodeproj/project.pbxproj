@@ -25,8 +25,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		291D4AEB638370B6BB190C9A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		89DA61B2468C46538BD0BADE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6FFB8F9F29F4A2AB8736F93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		F3630085F995975467272F64 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F701F63A172692BA00B85E97 /* P34Analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P34Analytics.h; sourceTree = "<group>"; };
 		F701F63B172692BA00B85E97 /* P34Analytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P34Analytics.m; sourceTree = "<group>"; };
 		F729204416314F550045EB76 /* libP34Analytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libP34Analytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9864871DFCACF3B422762CE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				291D4AEB638370B6BB190C9A /* Pods.debug.xcconfig */,
+				F3630085F995975467272F64 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F729203916314F550045EB76 = {
 			isa = PBXGroup;
 			children = (
@@ -53,7 +63,7 @@
 				F701F63B172692BA00B85E97 /* P34Analytics.m */,
 				F729204616314F550045EB76 /* Frameworks */,
 				F729204516314F550045EB76 /* Products */,
-				D6FFB8F9F29F4A2AB8736F93 /* Pods.xcconfig */,
+				E9864871DFCACF3B422762CE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,7 +144,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -152,6 +162,7 @@
 /* Begin XCBuildConfiguration section */
 		F729205016314F550045EB76 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 291D4AEB638370B6BB190C9A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -178,6 +189,7 @@
 		};
 		F729205116314F550045EB76 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 291D4AEB638370B6BB190C9A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -198,7 +210,7 @@
 		};
 		F729205316314F550045EB76 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6FFB8F9F29F4A2AB8736F93 /* Pods.xcconfig */;
+			baseConfigurationReference = 291D4AEB638370B6BB190C9A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/P34Analytics.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -215,7 +227,7 @@
 		};
 		F729205416314F550045EB76 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6FFB8F9F29F4A2AB8736F93 /* Pods.xcconfig */;
+			baseConfigurationReference = F3630085F995975467272F64 /* Pods.release.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/P34Analytics.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

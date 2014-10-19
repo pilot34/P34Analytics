@@ -7,59 +7,37 @@
 //
 
 #import "P34Analytics.h"
-#import "GANTracker.h"
-#import "UIDevice+IdentifierAddition.h"
+
+#import <GoogleAnalytics-iOS-SDK/GAITracker.h>
+#import <GoogleAnalytics-iOS-SDK/GAI.h>
+#import <GoogleAnalytics-iOS-SDK/GAIDictionaryBuilder.h>
+#import <GoogleAnalytics-iOS-SDK/GAIFields.h>
 
 @implementation P34Analytics
 
 + (void)startWithId:(NSString *)id
 {
-    [[GANTracker sharedTracker] startTrackerWithAccountID:id
-                                           dispatchPeriod:10
-                                                 delegate:nil];
-    [[GANTracker sharedTracker] setCustomVariableAtIndex:1
-                                                    name:@"app_version"
-                                                   value:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
-                                                   scope:kGANVisitorScope
-                                               withError:nil];
-    
-    [[GANTracker sharedTracker] setCustomVariableAtIndex:2
-                                                    name:@"ios_version"
-                                                   value:UIDevice.currentDevice.systemVersion
-                                                   scope:kGANVisitorScope
-                                               withError:nil];
-    
-    [[GANTracker sharedTracker] setCustomVariableAtIndex:3
-                                                    name:@"identifier"
-                                                   value:UIDevice.currentDevice.uniqueDeviceIdentifier
-                                                   scope:kGANVisitorScope
-                                               withError:nil];
-}
-
-
-+ (void)setCustomVariable:(NSString *)name value:(NSString *)value
-{
-    [[GANTracker sharedTracker] setCustomVariableAtIndex:5
-                                                    name:name
-                                                   value:value
-                                                   scope:kGANVisitorScope
-                                               withError:nil];
+    [[GAI sharedInstance] trackerWithTrackingId:id];
 }
 
 + (void)trackPageView:(NSString *)page
 {
-    [[GANTracker sharedTracker] trackPageview:page
-                                    withError:nil];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName
+           value:page];
+    
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 + (void)trackEvent:(NSString *)event
             action:(NSString *)action
 {
-    [[GANTracker sharedTracker] trackEvent:event
-                                    action:action
-                                     label:event
-                                     value:0
-                                 withError:nil];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:event ?: @"event"
+                                                          action:action ?: @"action"
+                                                           label:nil
+                                                           value:nil] build]];
 }
 
 + (void)trackEvent:(NSString *)event
