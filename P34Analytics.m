@@ -15,9 +15,13 @@
 
 @implementation P34Analytics
 
-+ (void)startWithId:(NSString *)id
++ (void)startWithId:(NSString *)aId
 {
-    [[GAI sharedInstance] trackerWithTrackingId:id];
+    id tracker = [[GAI sharedInstance] trackerWithTrackingId:aId];
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *iosVersion = [[UIDevice currentDevice] systemVersion];
+    [tracker set:[GAIFields customDimensionForIndex:1] value:version];
+    [tracker set:[GAIFields customDimensionForIndex:2] value:iosVersion];
 }
 
 + (void)trackPageView:(NSString *)page
