@@ -1,13 +1,12 @@
 PODS:
-  - GoogleAnalytics-iOS-SDK (3.0.9)
-  - UIDeviceAddition (1.0)
+  - GoogleAnalytics-iOS-SDK (3.10):
+    - GoogleAnalytics-iOS-SDK/Core (= 3.10)
+  - GoogleAnalytics-iOS-SDK/Core (3.10)
 
 DEPENDENCIES:
   - GoogleAnalytics-iOS-SDK
-  - UIDeviceAddition
 
 SPEC CHECKSUMS:
-  GoogleAnalytics-iOS-SDK: d9e198b1f955259a72886769be7377cdfcdb2250
-  UIDeviceAddition: fb25767a1b5447c4e40af0ca948178c9feb9d05b
+  GoogleAnalytics-iOS-SDK: f422062075d9ccb1ea8d783fc5ba3829461e9502
 
-COCOAPODS: 0.34.2
+COCOAPODS: 0.35.0
