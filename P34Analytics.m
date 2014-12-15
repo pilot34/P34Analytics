@@ -26,27 +26,38 @@
 
 + (void)trackPageView:(NSString *)page
 {
+    [self trackPageView:page pageTitle:nil];
+}
+
++ (void)trackPageView:(NSString *)page
+            pageTitle:(NSString *)title
+{
     id tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName
-           value:page];
     
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    GAIDictionaryBuilder *b = [GAIDictionaryBuilder createScreenView];
+    [b set:page forKey:kGAIScreenName];
+    
+    if (title)
+        [b set:page forKey:kGAITitle];
+    
+    [tracker send:[b build]];
 }
 
 + (void)trackEvent:(NSString *)event
             action:(NSString *)action
+             value:(NSNumber *)value
 {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:event ?: @"event"
-                                                          action:action ?: @"action"
-                                                           label:nil
-                                                           value:nil] build]];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:nil
+                                                          action:event ?: @""
+                                                           label:action ?: @""
+                                                           value:value ?: nil] build]];
 }
 
 + (void)trackEvent:(NSString *)event
 {
-    [self trackEvent:event action:event];
+    [self trackEvent:event action:nil value:nil];
 }
 
 

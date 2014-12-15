@@ -13,9 +13,17 @@
 + (void)startWithId:(NSString *)id;
 + (void)trackPageView:(NSString *)page;
 
++ (void)trackPageView:(NSString *)page
+            pageTitle:(NSString *)title;
+
++ (void)trackEvent:(NSString *)event;
+
 + (void)trackEvent:(NSString *)event
             action:(NSString *)action;
 
-+ (void)trackEvent:(NSString *)event;
++ (void)trackEvent:(NSString *)event
+            action:(NSString *)action
+             value:(NSNumber *)value;
+
 
 @end
