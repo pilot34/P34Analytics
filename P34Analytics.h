@@ -11,10 +11,13 @@
 @interface P34Analytics : NSObject
 
 + (void)startWithId:(NSString *)id;
+
 + (void)trackPageView:(NSString *)page;
 
 + (void)trackPageView:(NSString *)page
             pageTitle:(NSString *)title;
+
++ (void)setEventsCategory:(NSString *)category;
 
 + (void)trackEvent:(NSString *)event;
 

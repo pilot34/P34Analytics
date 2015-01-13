@@ -13,6 +13,8 @@
 #import <GoogleAnalytics-iOS-SDK/GAIDictionaryBuilder.h>
 #import <GoogleAnalytics-iOS-SDK/GAIFields.h>
 
+static NSString *__eventsCategory = nil;
+
 @implementation P34Analytics
 
 + (void)startWithId:(NSString *)aId
@@ -22,6 +24,11 @@
     NSString *iosVersion = [[UIDevice currentDevice] systemVersion];
     [tracker set:[GAIFields customDimensionForIndex:1] value:version];
     [tracker set:[GAIFields customDimensionForIndex:2] value:iosVersion];
+}
+
++ (void)setEventsCategory:(NSString *)category
+{
+    __eventsCategory = category;
 }
 
 + (void)trackPageView:(NSString *)page
@@ -49,7 +56,7 @@
 {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:nil
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:__eventsCategory
                                                           action:event ?: @""
                                                            label:action ?: @""
                                                            value:value ?: nil] build]];
@@ -60,5 +67,9 @@
     [self trackEvent:event action:nil value:nil];
 }
 
++ (void)trackEvent:(NSString *)event action:(NSString *)action
+{
+    [self trackEvent:event action:action value:nil];
+}
 
 @end
