@@ -19,7 +19,9 @@ static NSString *__eventsCategory = nil;
 
 + (void)startWithId:(NSString *)aId
 {
-    id tracker = [[GAI sharedInstance] trackerWithTrackingId:aId];
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:aId];
+    tracker.allowIDFACollection = YES;
+    
     NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString *iosVersion = [[UIDevice currentDevice] systemVersion];
     [tracker set:[GAIFields customDimensionForIndex:1] value:version];
